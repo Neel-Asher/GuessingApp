@@ -1,26 +1,31 @@
 /**
-* GuessingApp - Use Case 4: Error Handling and Validation
+* GuessingApp - Use Case 5: Game Result Storage
 * 
 * This class serves as the application entry point.
 * It initializes the game configuration and displays game rules.
 * 
 * Use scanner class to receive input from the user (guess).
-* Error Handling and Validation is introduced at this stage.
+* Game Result Storage is introduced at this stage.
 *
 * @author Neel Asher
-* @version 4.0
-*/
+* @version 5.0
+*/	
 
 import java.util.*;
 public class GuessingApp {
 	public static void main (String[] args) throws InvalidInputException {
 		System.out.println("Welcome to the Guessing App!");
+		Scanner sc = new Scanner (System.in);
+		
+		System.out.print("Enter the player name: ");
+		String player = sc.nextLine(); 
+		
 		GameConfig config = new GameConfig();
 		config.showRules();
 		
-		Scanner sc = new Scanner (System.in);
 		int attempts = 0;
 		int hintCount = config.getMaxHints();
+		boolean win = false;
 		
 		/* 
 		* Game loop runs until the player
@@ -39,10 +44,12 @@ public class GuessingApp {
 			* if the correct number is guessed.
 			*/
 			if ("CORRECT".equals(res)) {
+				win = true;
 				break;
 			} else {
 				System.out.println(HintService.generateHint(config.getTargetNumber(),hintCount--));
 			}
 		}
+		StorageService.saveResult(player,attempts,win);
 	}
 }
