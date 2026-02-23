@@ -10,10 +10,33 @@
 * @version 1.0
 */
 
+import java.util.*;
 public class GuessingApp {
 	public static void main (String[] args) {
 		System.out.println("Welcome to the Gussing App!");
-		GameConfig gameConfig = new GameConfig();
-		gameConfig.showRules();
+		GameConfig config = new GameConfig();
+		config.showRules();
+		
+		Scanner sc = new Scanner (System.in);
+		int attempts = 0;
+		
+		/* 
+		* Game loop runs until the player
+		* exhausts the maximum attempts.
+		*/
+		while (attempts<config.getMaxAttempts()) {
+			System.out.print("Enter your guess: ");
+			int guess = sc.nextInt();
+			attempts++;
+			
+			String res = GuessValidator.validateGuess(guess,config.getTargetNumber());
+			System.out.println(res);
+			
+			/*
+			* Stop the loop immediately
+			* if the correct number is guessed.
+			*/
+			if ("CORRECT".equals(res)) break;	
+		}
 	}
 }
