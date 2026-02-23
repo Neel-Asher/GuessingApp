@@ -1,19 +1,19 @@
 /**
-* GuessingApp - Use Case 3: Hint Generation
+* GuessingApp - Use Case 4: Error Handling and Validation
 * 
 * This class serves as the application entry point.
 * It initializes the game configuration and displays game rules.
 * 
 * Use scanner class to receive input from the user (guess).
-* Hint Service is introduced at this stage.
+* Error Handling and Validation is introduced at this stage.
 *
 * @author Neel Asher
-* @version 3.0
+* @version 4.0
 */
 
 import java.util.*;
 public class GuessingApp {
-	public static void main (String[] args) {
+	public static void main (String[] args) throws InvalidInputException {
 		System.out.println("Welcome to the Guessing App!");
 		GameConfig config = new GameConfig();
 		config.showRules();
@@ -28,7 +28,7 @@ public class GuessingApp {
 		*/
 		while (attempts<config.getMaxAttempts()) {
 			System.out.print("Enter your guess: ");
-			int guess = sc.nextInt();
+			int guess = ValidationService.validateInput(sc.nextLine());
 			attempts++;
 			
 			String res = GuessValidator.validateGuess(guess,config.getTargetNumber());
