@@ -39,4 +39,4 @@ Guessing App - Object-Oriented Programming Learning Project
 + All iterations of the game and its details are stored in a text file.
 + Use do-while loops to implement this feature.
 + Add GameController as the restart executor.
-+ Intergrate GameControler into GuessApp.
++ Intergrate GameControler into GuessingApp.
